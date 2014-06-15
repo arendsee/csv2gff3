@@ -59,18 +59,11 @@ def _parser():
         default='unknown'
     )
     parser.add_argument(
-        '-s', '--start',
-        help='csv column corresponding to gff3 column 4',
-        metavar='INT',
+        '-b', '--bounds',
+        help='csv indices corrsponding to start and end',
         type=int,
-        default=-1
-    )
-    parser.add_argument(
-        '-e', '--end',
-        help='csv column corresponding to gff3 column 5',
-        metavar='INT',
-        type=int,
-        default=-1
+        nargs=2,
+        metavar='INT'
     )
     parser.add_argument(
         '-c', '--score',
@@ -152,7 +145,7 @@ def _process_line(args, inrow):
         outrow[2] = args.types
 
     try:
-        start, end = inrow[args.start], inrow[args.end]
+        start, end = [inrow[x] for x in args.bounds]
     except IndexError:
         print('You must provide bounds for the feature', file=sys.stderr)
         raise SystemExit
