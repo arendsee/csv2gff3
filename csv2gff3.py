@@ -1,9 +1,18 @@
 #!/usr/bin/env python3
 
 import argparse
+import sys
 
-def parser(argv=None):
+def _parser(argv=None):
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--input',
+        help='input csv file (default STDIN)',
+        type=argparse.FileType('r'),
+        nargs='?',
+        default=sys.stdin,
+        metavar='FILE'
+    )
     parser.add_argument(
         '-q', '--seqid',
         help='csv column corresponding to gff3 column 1',
@@ -13,7 +22,8 @@ def parser(argv=None):
     parser.add_argument(
         '-Q', '--seqids',
         help='set all seqids to this value',
-        metavar='STR'
+        metavar='STR',
+        default='unknown'
     )
     parser.add_argument(
         '-r', '--source',
@@ -24,7 +34,8 @@ def parser(argv=None):
     parser.add_argument(
         '-R', '--sources',
         help='set all source to this value',
-        metavar='STR'
+        metavar='STR',
+        default='unknown'
     )
     parser.add_argument(
         '-t', '--type',
@@ -35,7 +46,8 @@ def parser(argv=None):
     parser.add_argument(
         '-T', '--types',
         help='set all type to this value',
-        metavar='STR'
+        metavar='STR',
+        default='unknown'
     )
     parser.add_argument(
         '-s', '--start',
@@ -44,20 +56,10 @@ def parser(argv=None):
         type=int
     )
     parser.add_argument(
-        '-S', '--starts',
-        help='set all start to this value',
-        metavar='STR'
-    )
-    parser.add_argument(
         '-e', '--end',
         help='csv column corresponding to gff3 column 5',
         metavar='INT',
         type=int
-    )
-    parser.add_argument(
-        '-E', '--ends',
-        help='set all end to this value',
-        metavar='STR'
     )
     parser.add_argument(
         '-c', '--score',
@@ -68,7 +70,8 @@ def parser(argv=None):
     parser.add_argument(
         '-C', '--scores',
         help='set all score to this value',
-        metavar='STR'
+        metavar='STR',
+        default='.'
     )
     parser.add_argument(
         '-d', '--strand',
@@ -79,7 +82,14 @@ def parser(argv=None):
     parser.add_argument(
         '-D', '--strands',
         help='set all strand to this value',
-        metavar='STR'
+        metavar='STR',
+        default='.'
+    )
+    parser.add_argument(
+        '--guess-strand',
+        help="'+' if end>start, '-' if start>end",
+        action='store_true',
+        default=False
     )
     parser.add_argument(
         '-p', '--phase',
@@ -90,7 +100,8 @@ def parser(argv=None):
     parser.add_argument(
         '-P', '--phases',
         help='set all phase to this value',
-        metavar='STR'
+        metavar='STR',
+        default='.'
     )
     parser.add_argument(
         '-a', '--attribute',
@@ -101,13 +112,25 @@ def parser(argv=None):
     parser.add_argument(
         '-A', '--attributes',
         help='set all attribute to this value',
-        metavar='STR'
+        metavar='STR',
+        default='.'
     )
     parser.add_argument(
         '-n', '--attr-name',
         help='the name given to all attributes (e.g. query)',
-        metavar='STR'
+        metavar='STR',
+        default=''
     )
     args = parser.parse_args()
 
-args = parser()
+def get_gff3(args):
+    pass
+
+if __name__ == '__main__':
+
+    args = _parser()
+
+    gff3 = get_gff3(args)
+
+    for line in gff3:
+        print('\t'.join(line))
