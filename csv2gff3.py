@@ -151,30 +151,26 @@ def _process_line(args, inrow):
     elif args.types:
         outrow[2] = args.types
 
-    if args.start >= 0:
-        outrow[3] = inrow[args.start]
-    else:
-        print("You must provide start positions", file=sys.stderr)
+    try:
+        start, end = inrow[args.start], inrow[args.end]
+    except IndexError:
+        print('You must provide bounds for the feature', file=sys.stderr)
         raise SystemExit
 
-    if args.end >= 0:
-        outrow[4] = inrow[args.end]
-    else:
-        print("You must provide end positions", file=sys.stderr)
-        raise SystemExit
+    outrow[3], outrow[4] = sorted([start, end])
 
     if args.score >= 0:
         outrow[5] = inrow[args.score]
 
     if args.strand >= 0:
         outrow[6] = inrow[args.strand]
+    elif args.guess_strand:
+        if end > start:
+            outrow[6] = '+'
+        elif end < start:
+            outrow[6] = '-'
     elif args.strands:
         outrow[6] = args.strands
-    elif args.guess_strand:
-        if outrow[4] > outrow[3]:
-            outrow[6] = '+'
-        elif outrow[4] < outrow[3]:
-            outrow[6] = '-'
 
     if args.phase >= 0:
         outrow[7] = inrow[args.phase]
