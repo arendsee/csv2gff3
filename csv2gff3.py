@@ -29,8 +29,7 @@ def _parser():
     parser.add_argument(
         '-Q', '--seqids',
         help='set all seqids to this value',
-        metavar='STR',
-        default='unknown'
+        metavar='STR'
     )
     parser.add_argument(
         '-r', '--source',
@@ -42,8 +41,7 @@ def _parser():
     parser.add_argument(
         '-R', '--sources',
         help='set all source to this value',
-        metavar='STR',
-        default='unknown'
+        metavar='STR'
     )
     parser.add_argument(
         '-t', '--type',
@@ -55,8 +53,7 @@ def _parser():
     parser.add_argument(
         '-T', '--types',
         help='set all type to this value',
-        metavar='STR',
-        default='unknown'
+        metavar='STR'
     )
     parser.add_argument(
         '-b', '--bounds',
@@ -82,8 +79,7 @@ def _parser():
     parser.add_argument(
         '-D', '--strands',
         help='set all strand to this value',
-        metavar='STR',
-        default='.'
+        metavar='STR'
     )
     parser.add_argument(
         '--guess-strand',
@@ -101,8 +97,7 @@ def _parser():
     parser.add_argument(
         '-P', '--phases',
         help='set all phase to this value',
-        metavar='STR',
-        default='.'
+        metavar='STR'
     )
     parser.add_argument(
         '-a', '--attribute',
@@ -114,8 +109,7 @@ def _parser():
     parser.add_argument(
         '-A', '--attributes',
         help='set all attribute to this value',
-        metavar='STR',
-        default='.'
+        metavar='STR'
     )
     parser.add_argument(
         '-n', '--attr-name',
