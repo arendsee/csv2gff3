@@ -1,0 +1,5 @@
+# example command:
+#  csv2gff3.py -q 0 -c 1 -b 5 6 -T blasthit --guess-strand -A myatt test-data/blast.tab
+#seqid	score	x	x	x	start	end
+seq1	9e-30	132	12718	12560	129	293
+seq2	9e-24	113	224	75	293	134
