@@ -3,8 +3,18 @@
 import argparse
 import sys
 
+__version__ = "0.0.1"
+
 def _parser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog='csv2gff3',
+        usage='csv2gff3 <options> FILE',
+        description='Make gff3 files using data in csv files'
+    )
+    parser.add_argument(
+        '-v', '--version',
+        action='version',
+        version='%(prog)s {}'.format(__version__))
     parser.add_argument(
         'infile',
         help='input csv file (default STDIN)',
