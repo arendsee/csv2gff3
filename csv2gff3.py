@@ -154,7 +154,12 @@ def _process_line(args, inrow):
         print('You must provide bounds for the feature', file=sys.stderr)
         raise SystemExit
 
-    outrow[3], outrow[4] = sorted([start, end])
+    try:
+        outrow[3:5] = [str(x) for x in sorted([int(start), int(end)])]
+
+    except ValueError:
+        print('Start and stop positions must be integers', file=sys.stderr)
+        raise SystemExit
 
     if args.score >= 0:
         outrow[5] = inrow[args.score]
