@@ -1,3 +1,2 @@
 #!/bin/bash
-
-./csv2gff3.py -q 0 -c 1 -b 5 6 -T blasthit --guess-strand -A myatt test-data/blast.tab
+./csv2gff3.py -sc {0} blastn . {5} {6} {1} . . 'hit({3}..{4})' -i test-data/blast.tab
